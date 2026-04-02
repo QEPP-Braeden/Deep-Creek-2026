@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deep Creek Lake · Apr 2–4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --forest:  #243b2f;
+    --pine:    #375743;
+    --sage:    #6e9e7e;
+    --mist:    #c5d8cc;
+    --cream:   #f4f0e6;
+    --parchment: #ede8da;
+    --water:   #3d7a9c;
+    --sky:     #cde3f0;
+    --amber:   #bf7620;
+    --dusk:    #6b5c7a;
+    --star:    #f5c842;
+    --ink:     #1a2620;
+    --white:   #fdfcf8;
+  }
+
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    height: 100svh;
+    min-height: 560px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: linear-gradient(170deg, #1a3020 0%, #243b2f 40%, #1e3545 75%, #1a2a38 100%);
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% 60%, rgba(61,122,156,0.2) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 30% at 20% 80%, rgba(110,158,126,0.14) 0%, transparent 60%);
+    animation: shimmer 9s ease-in-out infinite alternate;
+  }
+
+  @keyframes shimmer {
+    from { opacity: 0.5; }
+    to   { opacity: 1; }
+  }
+
+  .hero-photo {
+    position: absolute;
+    inset: 0;
+    background-image: url('https://dnr.maryland.gov/publiclands/PublishingImages/deepcreeklake-sunset-victoria-schwinabart.jpg');
+    background-size: cover;
+    background-position: center 40%;
+    opacity: 0.4;
+    animation: slow-zoom 22s ease-in-out infinite alternate;
+    z-index: 1;
+  }
+
+  @keyframes slow-zoom {
+    from { transform: scale(1); }
+    to   { transform: scale(1.08); }
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 5;
+    text-align: center;
+    padding: 2rem 1.5rem;
+    animation: rise 1.4s cubic-bezier(.22,.68,0,1.2) both;
+  }
+
+  @keyframes rise {
+    from { opacity:0; transform: translateY(40px); }
+    to   { opacity:1; transform: translateY(0); }
+  }
+
+  .hero-eyebrow {
+    font-weight: 300;
+    font-size: 0.72rem;
+    letter-spacing: 0.38em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 1rem;
+  }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.0;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--mist);
+  }
+
+  .hero-sub {
+    font-weight: 300;
+    font-size: 0.9rem;
+    color: rgba(197,216,204,0.85);
+    letter-spacing: 0.15em;
+    margin-top: 1.2rem;
+  }
+
+  .hero-pills {
+    margin-top: 2rem;
+    display: flex;
+    gap: 0.8rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .pill {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(197,216,204,0.22);
+    border-radius: 99px;
+    padding: 0.35rem 1rem;
+    font-size: 0.72rem;
+    color: var(--mist);
+    letter-spacing: 0.05em;
+    backdrop-filter: blur(6px);
+  }
+
+  .scroll-cue {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(197,216,204,0.55);
+    font-size: 0.62rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    animation: bob 2.5s ease-in-out infinite;
+  }
+  .scroll-cue .line { width: 1px; height: 34px; background: linear-gradient(to bottom, transparent, rgba(197,216,204,0.55)); }
+  @keyframes bob {
+    0%,100% { transform: translateX(-50%) translateY(0); }
+    50%      { transform: translateX(-50%) translateY(9px); }
+  }
+
+  /* ── STICKY NAV ── */
+  .sticky-nav {
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    background: var(--forest);
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 2px 24px rgba(0,0,0,0.3);
+    overflow-x: auto;
+  }
+
+  .sticky-nav a {
+    color: var(--mist);
+    text-decoration: none;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 1rem 1.6rem;
+    transition: all 0.2s;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .sticky-nav a:hover {
+    background: rgba(255,255,255,0.06);
+    color: var(--white);
+    border-bottom-color: var(--sage);
+  }
+
+  /* ── LAYOUT ── */
+  .wrap {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  /* ── SECTION ── */
+  .section { padding: 5rem 0 2.5rem; }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 1.4rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .day-badge {
+    flex-shrink: 0;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+  }
+  .badge-resto { background: var(--amber); }
+  .badge-thu   { background: var(--water); }
+  .badge-fri   { background: var(--forest); outline: 2px solid var(--sage); outline-offset: 2px; }
+  .badge-sat   { background: var(--dusk); }
+
+  .day-badge .wday {
+    font-size: 0.55rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.72);
+    font-family: 'DM Sans', sans-serif;
+  }
+  .day-badge .num {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.1;
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  .section-title-wrap h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.6rem, 3.5vw, 2.3rem);
+    font-weight: 700;
+    color: var(--forest);
+    line-height: 1.15;
+  }
+  .section-title-wrap .sub {
+    font-weight: 300;
+    font-size: 0.82rem;
+    color: var(--sage);
+    letter-spacing: 0.07em;
+    margin-top: 0.2rem;
+  }
+
+  .rule {
+    height: 1px;
+    background: linear-gradient(to right, var(--sage), transparent);
+    margin-bottom: 2.5rem;
+  }
+
+  /* ── RESTAURANT TABLE ── */
+  .resto-table {
+    background: var(--white);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 20px rgba(36,59,47,0.09);
+    margin-bottom: 2rem;
+  }
+
+  .resto-table-header {
+    background: var(--forest);
+    padding: 0.9rem 1.6rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1rem;
+    font-size: 0.63rem;
+    font-weight: 500;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--mist);
+  }
+
+  .resto-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1rem;
+    padding: 1.05rem 1.6rem;
+    border-bottom: 1px solid #e8ede9;
+    align-items: center;
+    transition: background 0.2s;
+  }
+  .resto-row:last-child { border-bottom: none; }
+  .resto-row:hover { background: var(--parchment); }
+
+  .resto-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--forest);
+    display: block;
+    margin-bottom: 0.1rem;
+  }
+  .resto-note {
+    font-size: 0.78rem;
+    font-weight: 300;
+    color: #5a6b62;
+  }
+
+  .menu-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--water);
+    text-decoration: none;
+    padding: 0.38rem 0.85rem;
+    border: 1px solid #b8d8ec;
+    border-radius: 99px;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .menu-btn:hover { background: var(--water); color: #fff; border-color: var(--water); }
+  .menu-btn::after { content: '↗'; font-size: 0.6rem; }
+
+  .no-menu { font-size: 0.75rem; font-style: italic; color: #9aaa9e; }
+
+  /* ── TIMELINE ── */
+  .timeline {
+    position: relative;
+    padding-left: 2.2rem;
+    margin-bottom: 2rem;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0.38rem;
+    top: 0.6rem;
+    bottom: 0.6rem;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--sage), var(--mist));
+  }
+
+  .tl-item {
+    position: relative;
+    margin-bottom: 1.9rem;
+  }
+
+  .tl-dot {
+    position: absolute;
+    left: -2.22rem;
+    top: 0.38rem;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--sage);
+    border: 2px solid var(--cream);
+    box-shadow: 0 0 0 2px var(--sage);
+  }
+  .tl-dot.key  { background: var(--amber); box-shadow: 0 0 0 2px var(--amber); }
+
+  .tl-time {
+    font-size: 0.64rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 0.18rem;
+  }
+
+  .tl-item h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.22rem;
+    font-weight: 600;
+    color: var(--forest);
+    margin-bottom: 0.3rem;
+  }
+  .tl-item p {
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: #4a5a52;
+    line-height: 1.65;
+    margin-bottom: 0.5rem;
+  }
+
+  .tl-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--water);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .tl-link:hover { color: var(--forest); }
+  .tl-link::after { content: '→'; }
+
+  /* ── PLACE CARD with reliable image approach ── */
+  .place-card {
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--white);
+    box-shadow: 0 3px 18px rgba(36,59,47,0.10);
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    margin-bottom: 1.5rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .place-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 32px rgba(36,59,47,0.16);
+  }
+
+  .place-img-wrap {
+    position: relative;
+    min-height: 230px;
+    overflow: hidden;
+    background: var(--forest);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .place-img-wrap .fallback-emoji {
+    font-size: 4rem;
+    opacity: 0.3;
+    position: absolute;
+  }
+
+  .place-img-wrap img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+  }
+  .place-card:hover .place-img-wrap img { transform: scale(1.06); }
+
+  .place-body {
+    padding: 1.8rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .place-body .tag-line {
+    font-size: 0.64rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 0.4rem;
+  }
+  .place-body h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--forest);
+    line-height: 1.15;
+    margin-bottom: 0.7rem;
+  }
+  .place-body p {
+    font-size: 0.87rem;
+    font-weight: 300;
+    color: #4a5a52;
+    line-height: 1.65;
+    margin-bottom: 1rem;
+  }
+
+  /* ── OPTION CARDS ── */
+  .options-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.8rem;
+  }
+
+  .opt-card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 1.4rem 1.5rem;
+    box-shadow: 0 2px 12px rgba(36,59,47,0.07);
+    border-top: 3px solid var(--mist);
+    transition: border-color 0.2s, transform 0.25s;
+  }
+  .opt-card:hover { border-top-color: var(--sage); transform: translateY(-3px); }
+
+  .opt-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--mist);
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+  .opt-card h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.08rem;
+    font-weight: 600;
+    color: var(--forest);
+    margin-bottom: 0.35rem;
+  }
+  .opt-card p {
+    font-size: 0.8rem;
+    font-weight: 300;
+    color: #5a6b62;
+    line-height: 1.55;
+    margin-bottom: 0.6rem;
+  }
+
+  /* ── STAR CARD ── */
+  .star-card {
+    background: linear-gradient(135deg, #0f1e17 0%, #1a2a38 100%);
+    border-radius: 16px;
+    padding: 1.8rem 2rem;
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.22);
+    margin-bottom: 2rem;
+  }
+  .star-icon { font-size: 2.5rem; flex-shrink: 0; filter: drop-shadow(0 0 10px rgba(245,200,66,0.5)); }
+  .star-card h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.22rem;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 0.3rem;
+  }
+  .star-card p {
+    font-size: 0.83rem;
+    font-weight: 300;
+    color: rgba(197,216,204,0.85);
+    line-height: 1.6;
+  }
+  .star-window {
+    display: inline-block;
+    margin-top: 0.6rem;
+    background: rgba(245,200,66,0.1);
+    border: 1px solid rgba(245,200,66,0.28);
+    border-radius: 99px;
+    padding: 0.25rem 0.9rem;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--star);
+  }
+
+  /* ── INFO BOX ── */
+  .info-box {
+    border-left: 3px solid var(--amber);
+    background: var(--parchment);
+    border-radius: 0 12px 12px 0;
+    padding: 1.2rem 1.6rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.87rem;
+    font-weight: 300;
+    color: var(--forest);
+    line-height: 1.65;
+  }
+  .info-box strong {
+    display: block;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--forest);
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--mist);
+    font-size: 0.8rem;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+  }
+  footer .foot-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.45rem;
+    font-weight: 600;
+    color: var(--white);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 720px) {
+    .place-card { grid-template-columns: 1fr; }
+    .place-img-wrap { min-height: 210px; }
+    .options-grid { grid-template-columns: 1fr; }
+    .sticky-nav { justify-content: flex-start; }
+    .section-header { flex-wrap: wrap; }
+  }
+
+  @media (max-width: 540px) {
+    .resto-row { grid-template-columns: 1fr; gap: 0.6rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-photo"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Maryland · Western Mountains</p>
+    <h1>Deep Creek <em>Lake</em></h1>
+    <p class="hero-sub">April 2 – 4 &nbsp;·&nbsp; Personalized Itinerary</p>
+    <div class="hero-pills">
+      <span class="pill">🛋️ Prioritize relaxing</span>
+      <span class="pill">📌 One activity / day</span>
+      <span class="pill">🌌 Evenings = stargazing</span>
+      <span class="pill">🔓 All plans optional</span>
+    </div>
+  </div>
+  <div class="scroll-cue">
+    <div class="line"></div>
+    <span>Scroll</span>
+  </div>
+</header>
+
+<!-- STICKY NAV -->
+<nav class="sticky-nav">
+  <a href="#restaurants">🍴 Restaurants</a>
+  <a href="#thursday">Thu · Apr 2</a>
+  <a href="#friday">Fri · Apr 3</a>
+  <a href="#saturday">Sat · Apr 4</a>
+</nav>
+
+<div class="wrap">
+
+  <!-- ════════ RESTAURANTS ════════ -->
+  <section class="section" id="restaurants">
+    <div class="section-header">
+      <div class="day-badge badge-resto">
+        <span class="num">🍴</span>
+      </div>
+      <div class="section-title-wrap">
+        <h2>Restaurants</h2>
+        <p class="sub">Keep for reference · Mix and match any day</p>
+      </div>
+    </div>
+    <div class="rule"></div>
+
+    <div class="resto-table">
+      <div class="resto-table-header">
+        <span>Restaurant</span>
+        <span>Menu</span>
+      </div>
+
+      <div class="resto-row">
+        <div>
+          <span class="resto-name">Trader's Coffee House</span>
+          <span class="resto-note">Breakfast sandwiches, bagels, pastries — best morning stop</span>
+        </div>
+        <a class="menu-btn" href="https://www.traderscoffeehouse.com/morningfavorties/" target="_blank" rel="noopener">View Menu</a>
+      </div>
+
+      <div class="resto-row">
+        <div>
+          <span class="resto-name">Firewater Kitchen &amp; Bar</span>
+          <span class="resto-note">American fare — chicken, burgers, pasta · shellfish-free friendly</span>
+        </div>
+        <a class="menu-btn" href="https://firewaterkitchen.com/food-menu-2/" target="_blank" rel="noopener">View Menu</a>
+      </div>
+
+      <div class="resto-row">
+        <div>
+          <span class="resto-name">Pawn Run Bar &amp; Kitchen</span>
+          <span class="resto-note">Sandwiches, American entrees, casual lakeside spot</span>
+        </div>
+        <a class="menu-btn" href="https://www.pawnrun.com/menu" target="_blank" rel="noopener">View Menu</a>
+      </div>
+
+      <div class="resto-row">
+        <div>
+          <span class="resto-name">Mountain State Brewing Co.</span>
+          <span class="resto-note">Craft beer pub with solid sandwiches and bar food</span>
+        </div>
+        <a class="menu-btn" href="https://www.msbcdeepcreek.com/menu#menu=sandwiches" target="_blank" rel="noopener">View Menu</a>
+      </div>
+
+      <div class="resto-row">
+        <div>
+          <span class="resto-name">Brenda's Pizzeria</span>
+          <span class="resto-note">Pizza and casual Italian comfort food</span>
+        </div>
+        <a class="menu-btn" href="https://www.brendaspizzeria.com/our-menu/" target="_blank" rel="noopener">View Menu</a>
+      </div>
+
+      <div class="resto-row">
+        <div>
+          <span class="resto-name">Honi Honi Bar</span>
+          <span class="resto-note">Lakeside pub — pizza &amp; bar food from neighboring Uno Pizzeria &amp; Grill · no online menu</span>
+        </div>
+        <span class="no-menu">No online menu</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ THURSDAY ════════ -->
+  <section class="section" id="thursday">
+    <div class="section-header">
+      <div class="day-badge badge-thu">
+        <span class="wday">Thu</span>
+        <span class="num">Apr 2</span>
+      </div>
+      <div class="section-title-wrap">
+        <h2>Arrival + Chill Night</h2>
+        <p class="sub">Check-in · Optional lake walk · Dinner · Stargazing</p>
+      </div>
+    </div>
+    <div class="rule"></div>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot key"></div>
+        <p class="tl-time">4:00 PM</p>
+        <h4>🔑 Check-In</h4>
+        <p>Settle in, unpack, exhale. The lake is yours for the weekend.</p>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <p class="tl-time">Late Afternoon · Optional</p>
+        <h4>Walk at Deep Creek Lake State Park</h4>
+        <p>A low-effort, high-reward lakeside walk. Great for stretching after the drive and catching late afternoon light on the water. No pressure — skip it if you'd rather just decompress.</p>
+        <a class="tl-link" href="https://dnr.maryland.gov/publiclands/pages/western/deepcreek.aspx" target="_blank" rel="noopener">Park Info</a>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <p class="tl-time">Evening</p>
+        <h4>Dinner + Airbnb Relax</h4>
+        <p>Choose from the restaurant list above, or grab takeout and settle in. Unpack, put on music, watch something. No agenda — just land.</p>
+      </div>
+    </div>
+
+    <!-- Stargazing 1 -->
+    <div class="star-card">
+      <div class="star-icon">🌌</div>
+      <div>
+        <h4>Stargazing Option #1</h4>
+        <p>Step outside the Airbnb or find a nearby dark spot. Western Maryland has very low light pollution — on a clear night the sky is genuinely stunning. No gear needed, just your eyes and maybe a blanket.</p>
+        <span class="star-window">Window: 9:00 – 11:30 PM</span>
+      </div>
+    </div>
+
+    <!-- Deep Creek Lake place card -->
+    <div class="place-card">
+      <div class="place-img-wrap">
+        <span class="fallback-emoji">🌊</span>
+        <img
+          src="https://dnr.maryland.gov/publiclands/PublishingImages/deepcreeklake-sunset-victoria-schwinabart.jpg"
+          alt="Deep Creek Lake State Park sunset">
+      </div>
+      <div class="place-body">
+        <span class="tag-line">State Park · Garrett County, MD</span>
+        <h3>Deep Creek Lake State Park</h3>
+        <p>Maryland's largest inland body of water, surrounded by forested hills. The state park offers shoreline access, quiet hiking trails, and some of the best sunset views in the region.</p>
+        <a class="tl-link" href="https://dnr.maryland.gov/publiclands/pages/western/deepcreek.aspx" target="_blank" rel="noopener">Park Details</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ FRIDAY ════════ -->
+  <section class="section" id="friday">
+    <div class="section-header">
+      <div class="day-badge badge-fri">
+        <span class="wday">Fri</span>
+        <span class="num">Apr 3</span>
+      </div>
+      <div class="section-title-wrap">
+        <h2>Light Adventure + Lazy Blocks</h2>
+        <p class="sub">Sleep in · Swallow Falls · Flexible afternoon · Stargazing</p>
+      </div>
+    </div>
+    <div class="rule"></div>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <p class="tl-time">Morning · Slow Start</p>
+        <h4>☕ Sleep In</h4>
+        <p>No alarms. Coffee, breakfast, ease in. Trader's Coffee House is the recommended breakfast stop — sandwiches, bagels, and pastries.</p>
+        <a class="tl-link" href="https://www.traderscoffeehouse.com/morningfavorties/" target="_blank" rel="noopener">Trader's Menu</a>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <p class="tl-time">Late Morning / Early Afternoon</p>
+        <h4>Swallow Falls State Park</h4>
+        <p>The main event of the trip. An easy, scenic trail winds through old-growth hemlock forest to Muddy Creek Falls — Maryland's tallest waterfall at 53 feet. Beautiful in spring. Bring snacks for a picnic lunch there.</p>
+        <a class="tl-link" href="https://dnr.maryland.gov/publiclands/Pages/western/swallowfalls.aspx" target="_blank" rel="noopener">Trail Info</a>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <p class="tl-time">Afternoon · Pick Your Vibe</p>
+        <h4>Flexible Options</h4>
+        <p>Whatever energy you have — these three options cover all of them:</p>
+      </div>
+    </div>
+
+    <div class="options-grid">
+      <div class="opt-card">
+        <div class="opt-num">1</div>
+        <h4>Active: Wisp Mountain Coaster</h4>
+        <p>An alpine coaster with sweeping mountain views at Wisp Resort. Fun, quick, and not too strenuous.</p>
+        <a class="tl-link" href="https://www.wispresort.com/" target="_blank" rel="noopener">Wisp Resort</a>
+      </div>
+      <div class="opt-card">
+        <div class="opt-num">2</div>
+        <h4>Relax: Airbnb</h4>
+        <p>Nap, read, sit on the deck, do absolutely nothing. Equally valid — the weekend is for recharging.</p>
+      </div>
+      <div class="opt-card">
+        <div class="opt-num">3</div>
+        <h4>Low-Key: Lake Again</h4>
+        <p>Return to Deep Creek Lake State Park. Sit by the water, skip stones, breathe.</p>
+        <a class="tl-link" href="https://dnr.maryland.gov/publiclands/pages/western/deepcreek.aspx" target="_blank" rel="noopener">Park Info</a>
+      </div>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <p class="tl-time">Evening</p>
+        <h4>Dinner + Hangout</h4>
+        <p>Pick a spot from the restaurant list, or grab takeout and hang at the Airbnb.</p>
+      </div>
+    </div>
+
+    <!-- Swallow Falls place card -->
+    <div class="place-card">
+      <div class="place-img-wrap">
+        <span class="fallback-emoji">🌊</span>
+        <img
+          src="https://deepcreekinns.com/wp-content/uploads/2023/09/shutterstock_1814143268.jpg"
+          alt="Swallow Falls State Park waterfall">
+      </div>
+      <div class="place-body">
+        <span class="tag-line">State Park · Oakland, MD</span>
+        <h3>Swallow Falls State Park</h3>
+        <p>A short, beautiful loop trail through Maryland's largest stand of old-growth hemlocks leads past four waterfalls — with Muddy Creek Falls as the 53-foot showstopper. Rarely crowded, never disappoints.</p>
+        <a class="tl-link" href="https://dnr.maryland.gov/publiclands/Pages/western/swallowfalls.aspx" target="_blank" rel="noopener">Park Info</a>
+      </div>
+    </div>
+
+    <!-- Wisp place card -->
+    <div class="place-card">
+      <div class="place-img-wrap">
+        <span class="fallback-emoji">⛰️</span>
+        <img
+          src="https://beentheredonethatwithkids.com/wp-content/uploads/2021/10/Wisp-Resort-Chair-Lift-1536x1140.jpg"
+          alt="Wisp Resort chair lift">
+      </div>
+      <div class="place-body">
+        <span class="tag-line">Resort · McHenry, MD · Optional</span>
+        <h3>Wisp Resort — Mountain Coaster</h3>
+        <p>Maryland's only ski resort doubles as a year-round outdoor playground in spring. The gravity-powered mountain coaster gives you sweeping views over the Allegheny highlands — quick, fun, and no ski experience needed.</p>
+        <a class="tl-link" href="https://www.wispresort.com/" target="_blank" rel="noopener">Wisp Resort Site</a>
+      </div>
+    </div>
+
+    <!-- Stargazing 2 -->
+    <div class="star-card">
+      <div class="star-icon">✨</div>
+      <div>
+        <h4>Stargazing Option #2</h4>
+        <p>Drive 5–10 minutes away from the lake lights, find an open field or pulloff, and bring blankets. Use a stargazing app like Stellarium or Sky Map. The Milky Way is sometimes visible from this area on clear nights.</p>
+        <span class="star-window">Window: 9:30 PM – Midnight</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ SATURDAY ════════ -->
+  <section class="section" id="saturday">
+    <div class="section-header">
+      <div class="day-badge badge-sat">
+        <span class="wday">Sat</span>
+        <span class="num">Apr 4</span>
+      </div>
+      <div class="section-title-wrap">
+        <h2>Easy Departure</h2>
+        <p class="sub">Sleep in · Optional breakfast · Pack · Hit the road</p>
+      </div>
+    </div>
+    <div class="rule"></div>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <p class="tl-time">Morning</p>
+        <h4>🛌 Sleep In / Optional Breakfast</h4>
+        <p>Last morning — no rush. Make coffee at the Airbnb or head to Trader's Coffee House one last time. Pack at your own pace before 11.</p>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot key"></div>
+        <p class="tl-time">11:00 AM</p>
+        <h4>🔑 Checkout</h4>
+        <p>Return the keys and hit the road. The mountains will be here next time.</p>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <strong>Safe travels 🌲</strong>
+      Thanks for a great weekend. Drive safe and don't leave anything behind on the way out!
+    </div>
+  </section>
+
+</div><!-- /wrap -->
+
+<footer>
+  <span class="foot-title">Deep Creek Lake · April 2–4</span>
+  Personalized Itinerary &nbsp;·&nbsp; Have the best trip 🌌
+</footer>
+
+</body>
+</html>
